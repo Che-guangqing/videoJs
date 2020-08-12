@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" \ <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+
+<link href="https://cdn.bootcdn.net/ajax/libs/video.js/5.2.1/video-js.min.css" rel="stylesheet">
+<script src="https://cdn.bootcdn.net/ajax/libs/video.js/5.2.1/video.min.js"></script>
+<script>
+    videojs.options.flash.swf = "https://cdn.bootcdn.net/ajax/libs/videojs-swf/5.2.0/video-js.swf"
+</script>
+
+</head>
+
+<body>
+    <!-- V6.X.X的播不了rtmp，V5.x.x的才行，对比发现，V6.X.X目录下没有video-js.swf，rtmp需要flash来播  -->
+    <div class="wrapper">
+        <video id="myvideo" class="video-js " width="700" height="500" poster="./souece/poster.png" preload>
+            <source src="rtmp://58.200.131.2:1935/livetv/hunantv">
+            </source>
+        </video>
+    </div>
+    <script>
+        var myvideo = videojs("myvideo", {
+            // muted: true,        // 是否静音
+            controls: true,        // 是否显示控制条
+            // loop : true,        // 是否循环播放
+
+            controlBar: {          // 设置控制条组件
+                // 设置控制条里面组件的相关属性及显示与否
+
+                // 'currentTimeDisplay': false,    // 当前已播放时间
+                // 'timeDivider': false,           // '/' 分隔符
+                // 'durationDisplay': false,       //总时间  
+                // // 当前时间/总时间
+
+                'remainingTimeDisplay': false,     // 当前播放时间  -0.32
+
+                'volumeMenuButton': false,         //音量控制
+
+                // 'liveDisplay': false,           //直播流时，显示LIVE
+                // 'progressControl': true,        //点播流时，播放进度条，seek控制
+
+                'playToggle': true,                //播放暂停按钮
+                'fullscreenToggle': true,          //全屏控制
+            },
+            source: [ // 视频源 
+                {
+                    src: './123.mp4',
+                    type: 'video/mp4',
+                    poster: './poster.png'
+                }
+            ]
+        });
+
+        var controlBar = document.getElementsByClassName('vjs-control-bar')[0];           //获取控制条部分
+        var fullscreen = document.getElementsByClassName('vjs-fullscreen-control')[0];    //获取全屏按钮
+        var div = document.createElement('div');
+
+        div.innerHTML = '<div class="definition">流畅</div> <ul class="definition-list" style="display:none" ><li>1080P</li> <li>720P</li> <li>高清</li> <li>流畅</li> <li>极速</li> </ul>'
+        controlBar.insertBefore(div, fullscreen);
+        var ulList = document.getElementsByClassName('definition-list')[0];
+        var li = ulList.getElementsByTagName('li')
+
+        console.log(controlBar)
+
+        div.onmouseenter = function () {
+            console.log('切换清晰度')
+            ulList.style.display = 'block';
+        }
+        div.onmouseleave = function () {
+            ulList.style.display = 'none';
+        }
+
+        for (var i = 0; i < li.length; i++) {
+            let text = li[i].innerHTML;
+            li[i].onclick = function () {
+                console.log('播放到多少时间' + myvideo.currentTime())
+                console.log('当前播放视频地址' + myvideo.currentSrc())
+                // console.log(`把当前url换成${text}视频`)
+                var text1 = document.getElementsByClassName('definition')[0]
+                console.log(text1.innerHTML = text)
+            }
+        }
+
+    </script>
+</body>
+
+</html>
+<style>
+    .definition {
+        line-height: 20px;
+        width: 40px;
+        text-align: center;
+        margin-left: 10px;
+        padding-top: 5px;
+        cursor: pointer;
+    }
+
+    .definition-list {
+        padding-top: 10px;
+        width: 100px;
+        height: 110px;
+        background-color: rgba(0, 0, 0, 0.7);
+        margin-bottom: 20px;
+        position: absolute;
+        bottom: 30px;
+        right: 10px;
+    }
+
+    .definition-list li {
+        list-style: none;
+        line-height: 20px;
+        color: white;
+        cursor: pointer;
+    }
+
+
+    .video-js .vjs-control {
+        width: 10em；
+    }
+</style>

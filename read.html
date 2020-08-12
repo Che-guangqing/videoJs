@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>video.js</title>
+    <link rel="stylesheet" href="./style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/video.js/7.3.0/video-js.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/video.js/7.3.0/video.min.js"></script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <video id="myvideo" class="video-js vjs-big-play-centered" preload="auto" poster="./poster.png" controls
+            autoplay data-setup="{}" width="400" height="300">
+            <source src="./123.mp4">
+            </source>
+        </video>
+    </div>
+
+
+    <script>
+        var myvideo = videojs("myvideo", {
+            // muted: true,  // 是否静音
+            // controls : false,     // 是否显示控制条
+            // loop : true,   // 是否循环播放
+            // language:'zh-CN',
+
+
+            controlBar: { // 设置控制条组件
+                // 设置控制条里面组件的相关属性及显示与否
+
+                // 'currentTimeDisplay': true,  // 当前已播放时间
+                'timeDivider': false,   // '/' 分隔符
+                // 'durationDisplay': true,  //总时间  
+                // // 当前时间/总时间
+
+                // 'remainingTimeDisplay': false, // 当前播放时间  -0.32
+
+                // 'volumeMenuButton': false, //音量控制
+
+                'liveDisplay': true, //直播流时，显示LIVE
+                'progressControl': true, //点播流时，播放进度条，seek控制
+
+                'playToggle': true,   //播放暂停按钮
+                'fullscreenToggle': true,//全屏控制
+                // 
+                // 使用children的形式可以控制每一个控件的位置，以及显示与否
+                // children: [
+                //     { name: 'playToggle' }, // 播放按钮
+                //     { name: 'currentTimeDisplay' }, // 当前已播放时间
+                //     { name: 'progressControl' }, // 播放进度条
+                //     { name: 'durationDisplay' }, // 总时间
+                //     { // 倍数播放
+                //         name: 'playbackRateMenuButton',
+                //         'playbackRates': [0.5, 1, 1.5, 2, 2.5]
+                //     },
+                //     {
+                //         name: 'volumePanel', // 音量控制
+                //         inline: false, // 不使用水平方式
+                //     },
+                //     { name: 'FullscreenToggle' } // 全屏
+                // ]
+            },
+
+            // source: [ // 视频源
+            //     {
+            //         src: './123.mp4',
+            //         type: 'video/mp4',
+            //         poster: './poster.png'
+            //     }
+            // ]
+
+
+        });
+
+        myvideo.ready(function () {
+            // console.log("已就绪");
+            // console.log(this.duration()); //总时长在ready中无法获取 NaN
+            // console.log(this.buffered()); //缓冲
+        });
+
+        console.log(myvideo)
+
+        // myvideo.currentTime(20) // 设置当前播放时间
+
+        // myvideo.volume(0.5)
+        // console.log(myvideo.volume())  // 获取声音
+
+        // myvideo.width(300);
+        // myvideo.height(200);
+        // console.log(myvideo.width())  
+        // console.log(myvideo.height())  
+
+        onclick = function () {
+            // console.log(myvideo.currentTime());  // 获取当前播放时间
+            // console.log(myvideo.duration())   //视频总时长
+            console.log(
+                myvideo.currentType(),  //视频总时长
+                myvideo.currentSrc(),
+                myvideo.networkState(),
+
+            )
+        }
+
+        myvideo.on("ended", function () {
+            console.log("视频播放结束");
+        })
+
+        myvideo.on("pause", function () {
+            console.log("点击暂停");
+        })
+
+        myvideo.on("play", function () {
+            console.log("点击播放");
+        })
+
+        myvideo.on("volumechange", function () {
+            console.log("声音改变");
+        })
+
+        myvideo.on("timeupdate", function () {
+            console.log("视频播放中");
+        })
+
+        myvideo.on("seeked", function () {
+            console.log("视频跳转结束");
+        })
+
+        myvideo.on("seeking", function () {
+            console.log("视频跳转中");
+        })
+
+
+
+    </script>
+</body>
+
+</html>
+<style>
+    .wrapper {
+        width: 700px;
+        height: 500px;
+        /* background-color: black; */
+        position: relative;
+    }
+
+    video {
+        width: 90%;
+        border: none;
+        position: absolute;
+        margin-top: 0;
+    }
+</style>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./video.css">
+    <link rel="stylesheet" href="./souece/iconfont/iconfont.css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <video class="vedio-player" src="./souece/123.mp4" autoplay></video>
+        <div class="menu">
+            <div class="control-wrapper">
+                <div class="progress"></div>
+                <div class="control"></div>
+            </div>
+            <div class="play"><i class="iconfont icon-icon_play"></i> </div>
+            <div class="time"></div>
+            <div class="definition">流畅</div>
+            <div>
+                <ul class="definition-list">
+                    <li>1080P</li>
+                    <li>720P</li>
+                    <li>高清</li>
+                    <li>流畅</li>
+                    <li>极速</li>
+                </ul>
+            </div>
+            <div class="full_screen"> <i class="iconfont icon-fangda"></i> </div>
+        </div>
+    </div>
+    <script>
+
+        var wrapper = document.getElementsByClassName('wrapper')[0];
+        var vedioPlayer = document.getElementsByClassName('vedio-player')[0];
+
+        var menu = document.getElementsByClassName('menu')[0];
+        var play = document.getElementsByClassName('play')[0];
+        var time = document.getElementsByClassName('time')[0];
+        var controlWrapper = document.getElementsByClassName('control-wrapper')[0];
+        var ctrBar = controlWrapper.getElementsByClassName('control')[0];
+        var progress = document.getElementsByClassName('progress')[0];
+
+        var definitionBtn = document.getElementsByClassName('definition')[0];
+        var definitionList = document.getElementsByClassName('definition-list')[0];
+        var definition = definitionList.getElementsByTagName('li')
+        var fullScreen = document.getElementsByClassName('full_screen')[0];
+
+
+        controlWrapper.onmouseenter = function () {
+            this.style.height = '14px';
+            this.style.top = '-14px';
+            progress.style.height = '14px';
+            ctrBar.style.height = '18px';
+        }
+        controlWrapper.onmouseleave = function () {
+            this.style.height = '2px';
+            this.style.top = '-2px';
+            progress.style.height = '2px';
+            ctrBar.style.height = '6px';
+        }
+        vedioPlayer.onmouseenter = function () {
+            menu.style.display = 'block';
+            wrapper.onmouseleave = function () {
+                menu.style.display = 'none';
+            }
+        }
+        controlWrapper.onclick = function (e) {
+            var location = e.layerX;
+            var width = controlWrapper.clientWidth;
+            console.log(location, width, e)
+            var targetTime = location / width * vedioPlayer.duration;
+            vedioPlayer.currentTime = targetTime;
+        }
+        play.onclick = function () {
+            if (vedioPlayer.paused) {
+                vedioPlayer.play();
+                // play.innerHTML = '暂停';
+                play.innerHTML = '<i class="iconfont icon-ai07">';
+                // 
+            } else {
+                vedioPlayer.pause();
+                // play.innerHTML = '播放';
+                play.innerHTML = '<i class="iconfont icon-icon_play">';
+
+            }
+        }
+
+        definitionBtn.onclick = function () {
+            // console.log('切换清晰度')
+            definitionList.style.display = 'block';
+        }
+        definitionList.onmouseleave = function () {
+            this.style.display = 'none';
+        }
+        for (var i = 0; i < definition.length; i++) {
+            // console.log(definition[i].innerHTML);
+            // console.log(vedioPlayer.src);
+            console.log(vedioPlayer.currentTime)
+
+            let url = vedioPlayer.src;
+            let text = definition[i].innerHTML;
+            let nums = url.length;
+            let nowsTime = vedioPlayer.currentTime; //切换清晰度时的时间
+
+            definition[i].onclick = function () {
+                var text1 = document.getElementsByClassName('definition')[0]
+                console.log(text1.innerHTML = text)
+            }
+
+        }
+        //切换视频清晰度
+        function videoSourceChoose(newUrl) {
+            var vedioPlayer = document.getElementsByClassName('vedio-player')[0];
+            let url = vedioPlayer.src;
+            let nums = url.length;
+            let nowsTime = vedioPlayer.currentTime; //切换清晰度时的时间
+            url = url.substring(0, nums - 4) + newUrl;    //视频地址
+            vedioPlayer.currentTime = nowsTime; //视频接着此处播放
+            vedioPlayer.load();
+        }
+
+        // 全屏
+        fullScreen.onclick = function () {
+            var root = document.documentElement;
+            root.requestFullscreen();
+            wrapper.style.height = window.screen.height + 'px';
+            wrapper.style.width = window.screen.width + 'px';
+            vedioPlayer.style.height = window.screen.height + 'px';
+            vedioPlayer.style.height = window.screen.width;
+        }
+
+        var timer = setInterval(function () {
+            var total = vedioPlayer.duration;
+            var nowTime = vedioPlayer.currentTime;
+            time.innerHTML =
+                `${parseInt(nowTime / 60)}:${parseInt(nowTime % 60)}/${parseInt(total / 60)}:${parseInt(total % 60)}`;
+            var width = nowTime / total * vedioPlayer.clientWidth;
+            progress.style.width = width + 'px';
+            ctrBar.style.left = width + 'px';
+        }, 1000)
+    </script>
+</body>
+
+</html>

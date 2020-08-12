@@ -1,0 +1,35 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" >
+<!--
+2013-9-30: Created.
+-->
+<svg>
+<metadata>
+Created by iconfont
+</metadata>
+<defs>
+
+<font id="iconfont" horiz-adv-x="1024" >
+  <font-face
+    font-family="iconfont"
+    font-weight="500"
+    font-stretch="normal"
+    units-per-em="1024"
+    ascent="896"
+    descent="-128"
+  />
+    <missing-glyph />
+    
+    <glyph glyph-name="ai07" unicode="&#59003;" d="M209.645253 32.065556l201.049992 0 0 703.866842L209.645253 735.932398 209.645253 32.065556zM611.804588 32.065556l201.113437 0 0 703.866842L611.804588 735.932398 611.804588 32.065556z"  horiz-adv-x="1024" />
+
+    
+    <glyph glyph-name="fangda" unicode="&#58986;" d="M704 832h256v-64h-256zM896 832h64v-256h-64zM66.688 832h64v-256h-64zM66.688 832h256v-64h-256zM66.688 1.024h256v-64h-256zM66.688 193.024h64v-256h-64zM896 193.024h64v-256h-64zM704 1.024h256v-64h-256z"  horiz-adv-x="1024" />
+
+    
+    <glyph glyph-name="icon_play" unicode="&#58895;" d="M897.143467 298.948267l-464.648534-311.5264c-46.976-31.488-110.592-18.944-142.08 28.023466A102.4 102.4 0 0 0 273.066667 72.47360000000003V695.5264c0 56.5504 45.8496 102.4 102.4 102.4a102.4 102.4 0 0 0 57.028266-17.348267l464.64-311.5264c46.976-31.488 59.528533-95.104 28.032-142.08a102.4 102.4 0 0 0-28.023466-28.023466z"  horiz-adv-x="1024" />
+
+    
+
+
+  </font>
+</defs></svg>
