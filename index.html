@@ -15,7 +15,7 @@
 <body>
     <!-- V6.X.X的播不了rtmp，V5.x.x的才行，对比发现，V6.X.X目录下没有video-js.swf，rtmp需要flash播放 -->
     <div class="wrapper">
-        <video id="myvideo" class="video-js " width="700" height="500" poster="./souece/poster.png" preload>
+        <video id="myvideo" class="video-js " width="700" height="500" preload>
             <source src="rtmp://58.200.131.2:1935/livetv/hunantv">
             </source>
         </video>
@@ -48,7 +48,7 @@
                 {
                     src: './123.mp4',
                     type: 'video/mp4',
-                    poster: './poster.png'
+                    // poster: './poster.png'
                 }
             ]
         });
@@ -75,8 +75,11 @@
         for (var i = 0; i < li.length; i++) {
             let text = li[i].innerHTML;
             li[i].onclick = function () {
-                console.log('播放到多少时间' + myvideo.currentTime())
                 console.log('当前播放视频地址' + myvideo.currentSrc())
+
+                if (text === '高清') {
+                    myvideo.src('rtmp://58.200.131.2:1935/livetv/hunantv')
+                }
                 // console.log(`把当前url换成${text}视频`)
                 var text1 = document.getElementsByClassName('definition')[0]
                 console.log(text1.innerHTML = text)
